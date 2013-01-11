@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @blog_post.user.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @blog_post.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @blog_post.body %>
+</p>
+
+
+<h2>Comments</h2>
+<%  @blog_post.comments.each do |comment| %>
+  <p>
+    <b>Commenter:</b>
+    <%= comment.user.name %>
+  </p>
+ 
+  <p>
+    <b>Comment:</b>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+
+
+
+
+<h2>Add a comment:</h2>
+<%= form_for([@blog_post, @blog_post.comments.build]) do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %><br />
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_field :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= link_to 'Edit', edit_blog_post_path(@blog_post) %> |
+<%= link_to 'Back', blog_posts_path %>
+
+
+ 
